@@ -1,176 +1,72 @@
 //Function In Block JS 
-// {
-//     function fun(){
-//         return "123";
-
-//     }
-
-// }
-// console.log(fun);
-
-//Function In Block Strict mode  JS 
-"use strict";
 {
-    function fun() {
+    function fun(){
         return "123";
 
     }
 
 }
 console.log(fun);
+/*
 
+In JavaScript, when you declare a function inside a block like `{}`, the behavior can change depending on whether you're using "strict mode" or not.
 
+1. **Without strict mode**:
+   - The function declared inside the block is visible outside the block.
+   - So, `console.log(fun)` will print the function definition without any errors.
+
+2. **With strict mode**:
+   - The function declared inside the block is not visible outside the block.
+   - So, `console.log(fun)` will throw a reference error because `fun` is not accessible outside the block.
+
+In simpler terms, without strict mode, the function is like a friendly neighbor who comes out of their house to greet you. But in strict mode, it's like they've locked their door and don't want to come out, so you can't see or interact with them from outside.
+In the provided code:*/
+
+//Function In Block Strict mode  JS 
+"use strict";
+{
+    function fun(){
+        return "123";
+
+    }
+    console.log(fun);
+
+}
+console.log(fun);
 
 /*
 
-The function `fun()` is declared inside a block, and strict mode is applied.
+The `"use strict";` directive enables strict mode for the entire script or the enclosing function, in this case, the block.
 
-Since the function `fun()` is declared within a block and strict mode is enabled, `fun()` will not be accessible outside of the block. Attempting to access `fun` outside the block will result in a reference error.
+Here's how strict mode affects this code:
 
-So, running `console.log(fun)` will throw a reference error because `fun` is not accessible outside the block due to strict mode.*/
+1. **Inside the block**:
+   - The function `fun()` is defined within the block. Since strict mode is enabled within the block, the function `fun()` is scoped to that block only. It cannot leak out to the outer scope.
+   - When `console.log(fun)` is executed within the block, it successfully logs the function definition because `fun()` is accessible within the same scope where it's defined.
 
-// Let Block Scoping
-var teacher = "Sanket"; //global
+2. **Outside the block**:
+   - When `console.log(fun)` is executed outside the block, `fun()` is not accessible. This is because strict mode confines the scope of `fun()` to the block where it's defined. Attempting to access `fun()` outside the block will result in a reference error because `fun` is not defined in the outer scope.
 
-function fun() { // global
-    console.log(teacher);// noo error will be given
-    console.log(content); //throws an error
+In summary, strict mode confines the scope of `fun()` to the block where it's defined, preventing it from being accessed outside that block. This behavior helps prevent unintentional variable/function declarations from polluting the global scope, thereby improving code clarity and reducing the likelihood of naming conflicts and bugs.*/
+
+//Let block Scoping 
+var teacher = "Sanket"; //global 
+function fun(){ //global
+    console.log(teacher); //np error will be given
+    console.log(content); // throws an error
     var teacher = " Pulkit"; //scope of fun
-    let content = "JS"; //content will be acces only post declaration
-    if (content == "JS") {
+    let content = "JS" // content will be access only post declaration
+    if(content == "JS")
+    {
         let hours = "120+";
         console.log(hours);
     }
-    console.log(teacher, content);
-}
+    console.log(teacher,content);
 
+}
 fun();
 console.log(teacher);
 console.log(content);
-
-/*Function Scope:
-
-Variables declared within a function using the 'var' keyword (prior to ES6) are scoped to that function.
-These variables are accessible only within the function in which they are declared and are not visible outside of it.
-
-Block Scope (introduced in ES6 with the let and const keywords):
-Variables declared using let and const are scoped to the nearest enclosing block, which can be a block of code within a function, a loop, or an if statement.
-These variables are accessible only within the block in which they are declared.*/
-// Var in Block Scope
-function fun() {
-    var i = 5;
-    while (i < 10) {
-        var x = i;
-        i++;
-
-    }
-    console.log(x)
-}
-fun();
-let i = 1;
-console.log(y);
-while (i < 5) {
-    var y = 10;
-    i++
-
-}
-console.log(y);
-
-//Use case of Var
-function fun(x) {
-    let i;// var i
-    if (x % 2 == 0) {
-        i = 0;
-
-    }
-    else {
-        i = 1;
-
-    }
-}
-
-function gun(x) {
-    if (x % 2 == 0) {
-        var i = 0;
-        //this looks like more clean implementation
-    }
-    else {
-        var i = 1;
-
-    }
-    console.log(i);
-}
-gun(10);
-
-/*
-
-The difference lies in the scope of the variable `i`.
-
-In the `fun()` function, `let i;` is declared at the top of the function block. It has a block scope limited to the function `fun()`. This means that `i` is accessible only within the `fun()` function. 
-
-In the `gun()` function, `var i;` is declared within the `if` and `else` blocks. However, due to hoisting in JavaScript, both declarations are brought to the top of the function, making `i` accessible throughout the function `gun()` but not outside of it.
-
-Now, as for which is cleaner, it's subjective. Some developers prefer `let` because it explicitly declares the scope of the variable. Others might find the use of `var` cleaner because it keeps the variable declaration closer to where it's being used.
-
-However, in terms of best practices and modern JavaScript, using `let` or `const` is generally preferred over `var` because it provides better control over variable scope and prevents certain types of bugs that can arise due to hoisting and variable redeclaration. So, the `fun()` implementation with `let` is considered cleaner and more modern.
-*/
-
-// use case of let 
-function fun() {
-    for (let i = 0; i < 10; i++) {
-        //do something
-        /*here ,this kind of implementation might not be useful cause
-         var will be accessible outside the for loop which is not good in general for program ,that's why 'let " will be more good to use here */
-        console.log(i);
-    }
-}
-    function process(x, y) {
-        if (x > y) {
-            /*var temp = x; // this temp variable has no use outside the if block , but still it */
-            let temp = x;
-            x = y;
-            y = temp;
-        }
-        return x - y;
-
-    }
-    fun();
-
-
-    
-//Re -declaration 
-// var x = 2;
-// var x = 3;
-// var allows re-declaration
-
-// let y = 4;
-// let y = 5;
-// let doesn't allow re-declaration
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
